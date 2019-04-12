@@ -9,7 +9,7 @@ It currently supports Google Geocoding API and HERE Geocoding API.
 
 Configuration:
 
-Default PORT is used is 8000 and Default HOST is localhost
+Default PORT used is 8000 and Default HOST is localhost
 Update line 23 and 24 in geo_coding_proxy.py
 
 
