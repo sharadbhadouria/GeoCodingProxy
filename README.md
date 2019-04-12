@@ -60,3 +60,7 @@ Bad request will have a response:
     "status": "No results found", 
     "data": {}
 }
+
+Adding new service:
+
+All service must derive from GeoCodingServiceDataProvider and must implement to_json and get_url_params.
