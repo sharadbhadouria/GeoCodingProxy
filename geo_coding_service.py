@@ -19,9 +19,7 @@ import json
 import urlparse
 import time
 import requests
-
-PORT = 8000
-HOST = 'localhost'
+import config
 
 
 class GeoCodingServiceDataProvider(object):
@@ -145,8 +143,8 @@ class HereGeocodingServiceProvider(GeoCodingServiceDataProvider):
 
 # Any new Geo data provider must be added to GEO_LOOKUP_SERVICES list
 GEO_LOOKUP_SERVICES = [
-    GoogleGeocodingServiceProvider(api_key='AIzaSyA5yP85N-1b45eItuwsahVEYi1QYV8hKZw'),
-    HereGeocodingServiceProvider(app_id='MvczrATKuakOh51L5Wqb', app_code='3C5nTfoswlZwte5FXuRkCQ')]
+    GoogleGeocodingServiceProvider(api_key=config.google_api_key),
+    HereGeocodingServiceProvider(app_id=config.here_app_id, app_code=config.here_app_code)]
 
 
 class GeoCodingServiceDriver(BaseHTTPRequestHandler):
@@ -203,15 +201,15 @@ def main():
     :return:
     """
     server_class = HTTPServer
-    httpd = server_class(('', PORT), GeoCodingServiceDriver)
-    print(time.asctime(), "Server Starts - %s:%s" % (HOST, PORT))
+    httpd = server_class(('', config.port), GeoCodingServiceDriver)
+    print(time.asctime(), "Server Starts - %s:%s" % (config.host, config.port))
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:
         pass
 
     httpd.server_close()
-    print(time.asctime(), "Server Stops - %s:%s" % (HOST, PORT))
+    print(time.asctime(), "Server Stops - %s:%s" % (config.host, config.port))
 
 
 if __name__ == '__main__':
