@@ -9,14 +9,16 @@ It currently supports Google Geocoding API and HERE Geocoding API.
 
 Configuration:
 
-Default PORT used is 8000 and Default HOST is localhost
-Update line 23 and 24 in geo_coding_proxy.py
+Default PORT used is 8000 and Default HOST is localhost.
+Update line 23 and 24 in geo_coding_proxy.py to customize your HOST and PORT
 
 
 Prerequisite:
 
 python 2.7
+
 pip
+
 The code was written in python 2.7
 
 
@@ -39,6 +41,8 @@ Once the service starts you will see something like "('Thu Apr 11 21:59:20 2019'
 How To Use The Services API:
 
 Request should be of the form http://localhost:8000/?q=san+francisco+dolores+park
+
+You can directly run the url on any latest browser OR 
 
 On another terminal/command prompt run following to see some results:
 
