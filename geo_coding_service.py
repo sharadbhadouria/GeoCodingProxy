@@ -66,12 +66,13 @@ class GoogleGeocodingServiceProvider(GeoCodingServiceDataProvider):
         :param response: response of the get request
         :return: Json formatted results
         """
-
         if response.ok:
             # parse the results and get the lat and lon key value
             json_response = response.json()
             if json_response['status'] == 'ZERO_RESULTS':
                 return {"status": "OK", "data": "No results found"}
+            elif json_response['status'] != 'OK':
+                return {"status": json_response['status'], "data": {}}
             return {"status": "OK", "data": json_response['results'][0]['geometry']['location']}
 
         raise response.raise_for_status()

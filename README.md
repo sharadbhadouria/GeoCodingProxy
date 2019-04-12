@@ -7,11 +7,6 @@ by using third party geocoding services. This service can support multiple geoco
 It currently supports Google Geocoding API and HERE Geocoding API.
 
 
-Configuration:
-
-Default PORT used is 8000 and Default HOST is localhost.
-Update line 23 and 24 in geo_coding_proxy.py to customize your HOST and PORT
-
 
 Prerequisite:
 
@@ -27,6 +22,8 @@ Setup:
 1. Clone this repo
 
 2. pip install -r requirements.txt
+
+3. Edit config.py file with your api credentials and server details
 
 
 How To Run The Service:
