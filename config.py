@@ -6,8 +6,8 @@ https://developers.google.com/maps/documentation/geocoding/start
 
 """
 
-google_api_key = "your google api id"
-here_app_id = "your here app id"
-here_app_code = "your app code"
-port = portnumber # note this is type integer
-host= "your host"
+GOOGLE_API_KEY = "your google api id"
+HERE_APP_ID = "your here app id"
+HERE_APP_CODE = "your app code"
+PORT = portnumber  # note this is type integer
+HOST = "your host"

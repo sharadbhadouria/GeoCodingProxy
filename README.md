@@ -30,7 +30,7 @@ How To Run The Service:
 
 Run following command from terminal/command prompt to start the service:
 
-python geo_coding_service.py
+python server.py
 
 Once the service starts you will see something like "('Thu Apr 11 21:59:20 2019', 'Server Starts - localhost:8000')"
 

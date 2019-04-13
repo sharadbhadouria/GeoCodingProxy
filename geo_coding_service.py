@@ -10,14 +10,11 @@ Geo coding proxy service
     $Author$ Sharad Bhadouria
     $Change$ 1
     $Reference$ https://wiki.python.org
-                https://developer.here.com/documentation/geocoder/topics/quick-start-geocode.html
-                https://developers.google.com/maps/documentation/geocoding/start
 """
 
-from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
+from BaseHTTPServer import BaseHTTPRequestHandler
 import json
 import urlparse
-import time
 import requests
 import config
 
@@ -71,7 +68,7 @@ class GoogleGeocodingServiceProvider(GeoCodingServiceDataProvider):
             json_response = response.json()
             if json_response['status'] == 'ZERO_RESULTS':
                 return {"status": "OK", "data": "No results found"}
-            elif json_response['status'] != 'OK':
+            if json_response['status'] != 'OK':
                 return {"status": json_response['status'], "data": {}}
             return {"status": "OK", "data": json_response['results'][0]['geometry']['location']}
 
@@ -144,8 +141,8 @@ class HereGeocodingServiceProvider(GeoCodingServiceDataProvider):
 
 # Any new Geo data provider must be added to GEO_LOOKUP_SERVICES list
 GEO_LOOKUP_SERVICES = [
-    GoogleGeocodingServiceProvider(api_key=config.google_api_key),
-    HereGeocodingServiceProvider(app_id=config.here_app_id, app_code=config.here_app_code)]
+    GoogleGeocodingServiceProvider(api_key=config.GOOGLE_API_KEY),
+    HereGeocodingServiceProvider(app_id=config.HERE_APP_ID, app_code=config.HERE_APP_CODE)]
 
 
 class GeoCodingServiceDriver(BaseHTTPRequestHandler):
@@ -194,24 +191,3 @@ class GeoCodingServiceDriver(BaseHTTPRequestHandler):
                     return self.send_code(200, json.dumps(results, indent=4))
 
         return self.send_code(404, json.dumps({"status": "No results found", "data": {}}, indent=4))
-
-
-def main():
-    """
-    Main method to start the server
-    :return:
-    """
-    server_class = HTTPServer
-    httpd = server_class(('', config.port), GeoCodingServiceDriver)
-    print(time.asctime(), "Server Starts - %s:%s" % (config.host, config.port))
-    try:
-        httpd.serve_forever()
-    except KeyboardInterrupt:
-        pass
-
-    httpd.server_close()
-    print(time.asctime(), "Server Stops - %s:%s" % (config.host, config.port))
-
-
-if __name__ == '__main__':
-    main()
